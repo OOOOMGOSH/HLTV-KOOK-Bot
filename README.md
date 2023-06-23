@@ -1,6 +1,8 @@
 # HLTV-KOOK-Bot
 A KOOK Bot for hltv info
 
+pip install -r requirements.txt
+
 Ensure bot token is filled into the config.json before running the bot
 
 {
