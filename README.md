@@ -27,7 +27,7 @@ start filename.py
 
 Linux:
 ```
-python filename.py
+python3 filename.py
 ```
 
 ## Contributing
