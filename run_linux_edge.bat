@@ -1,0 +1,1 @@
+run HLTV-Bot-LinuxEdge.py
