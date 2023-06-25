@@ -1,1 +1,1 @@
-run HLTV-Bot-WindowsEdge.py
+start HLTV-Bot-WindowsEdge.py
