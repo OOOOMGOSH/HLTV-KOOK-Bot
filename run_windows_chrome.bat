@@ -1,1 +1,1 @@
-run HLTV-Bot-WindowsChrome.py
+start HLTV-Bot-WindowsChrome.py
