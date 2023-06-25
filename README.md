@@ -21,3 +21,8 @@ Choose the correct version of the code depending on your system and the web brow
 ## Contributing
 
 [Open an issue](https://github.com/OOOOMGOSH/HLTV-KOOK-Bot/issues/new) or submit PRs.
+
+## License
+
+[GPL](LICENSE) © OOOOMGOSH
+
