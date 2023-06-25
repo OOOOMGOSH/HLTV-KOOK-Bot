@@ -18,6 +18,18 @@ Fill in bot token in config.json
 ```
 Choose the correct version of the code depending on your system and the web browser you want to use.
 
+## Run Bot
+
+Windows:
+```
+start filename.py
+```
+
+Linux:
+```
+$ python filename.py
+```
+
 ## Contributing
 
 [Open an issue](https://github.com/OOOOMGOSH/HLTV-KOOK-Bot/issues/new) or submit PRs.
