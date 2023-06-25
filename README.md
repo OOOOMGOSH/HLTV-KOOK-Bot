@@ -16,7 +16,6 @@ Fill in bot token in config.json
 ```
 { "token": "bot token", "verify_token": "", "encrypt_key": "" }
 ```
-Choose the correct version of the code depending on your system and the web browser you want to use.
 
 ## Run Bot
 
@@ -29,6 +28,8 @@ Linux:
 ```
 python3 filename.py
 ```
+
+Choose the correct version of the code depending on your system and the web browser you want to use.
 
 ## Contributing
 
