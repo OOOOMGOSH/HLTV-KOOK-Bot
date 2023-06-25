@@ -11,6 +11,7 @@ pip install -r requirements.txt
 ## Setup Bot
 
 Fill in bot token in config.json
+[Get bot token here](https://developer.kookapp.cn/app/index)
 ```
 { "token": "bot token", "verify_token": "", "encrypt_key": "" }
 ```
