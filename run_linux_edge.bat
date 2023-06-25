@@ -1,1 +1,1 @@
-run HLTV-Bot-LinuxEdge.py
+start HLTV-Bot-LinuxEdge.py
