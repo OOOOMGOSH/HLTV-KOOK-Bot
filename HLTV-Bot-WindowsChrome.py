@@ -51,13 +51,13 @@ async def rankings(msg: Message):
             players = detail[i].xpath(
                 "./div[@class='relative']/div[@class='playersLine ']/div[@class='rankingNicknames']/span/text()")
         # format output
-        results.append(f'{rank[0]} {team[0]} {points[0]}\n   ')
+        results.append(f'**{rank[0]} {team[0]} {points[0]}**\n   ')
         for player in players:
             results.append(f' · {player}')
-        results.append('\n')
+        results.append('\n---\n')
     r = ''.join(results)
     # kook send card message
-    card_message = CardMessage(Card(Module.Header('Team Rankings'), Module.Section(mode='left', text=r)))
+    card_message = CardMessage(Card(Module.Header('Team Rankings'), Module.Divider(), Module.Section(Element.Text(r))))
     await msg.reply(card_message)
 
 
@@ -80,8 +80,7 @@ async def player(msg: Message, name):
         player_href = detail[0].xpath("./tr/td/a/@href")
         print(player_href)
         for href in range(2 if len(player_href) >= 2 else 1):
-            s2 = Service('drivers/chromedriver.exe')
-            edge2 = webdriver.Edge(service=s2)
+            edge2 = webdriver.Edge(service=s)
             print(f"https://www.hltv.org{player_href[href]}")
             edge2.get(f"https://www.hltv.org{player_href[href]}")
             session2 = requests.Session()  # creat session
@@ -92,15 +91,15 @@ async def player(msg: Message, name):
             html2 = etree.HTML(edge2.page_source)  # convert to lxml to analyse
             player_info = html2.xpath("//div[@class='playerInfoWrapper']")
             print(player_info)
-            stats = ['\nStatistics (Past 3 months):\n']
+            stats = ['**Statistics (Past 3 months):**\n']
             statistics = html2.xpath("//div[@class='playerpage-container']/div[@class='player-stat']")
             print(statistics)
-            if statistics:  # statistics returned might be a empty list
+            if statistics:  # statistics returned might be an empty list
                 for stat in statistics:
                     type = stat.xpath("./b/text()")
                     value = stat.xpath("./span[@class='statsVal']/p/text()")
-                    stats.append(f'{type[0]}: {value[0]}\n')
-            s = ''.join(stats)
+                    stats.append(f'**{type[0]}**: {value[0]}\n')
+            st = ''.join(stats)
             player_name = player_info[0].xpath(
                 "./div[@class='playerNameWrapper']/div[@class='playerName']/h1[@class='playerNickname']/text()")
             player_real_name = player_info[0].xpath(
@@ -122,14 +121,16 @@ async def player(msg: Message, name):
                     top.append(', ' if i != len(player_top) - 1 else '')
             t = ''.join(top)
             if statistics:  # output player's info only if the player has statistics
-                results = [f'{player_name[0]}',
-                           f'\nReal name: {player_real_name[0][1:]}' if player_real_name != ['  '] else "\nReal name: N/A",
-                           f'\nAge: {player_age[0]}' if player_age else "\nAge: N/A",
-                           f'\nTeam: {player_team[0]}' if player_team else "\nTeam: N/A",
-                           f'\nTop 20: {t}' if player_top else "\nTop 20: N/A",
-                           f'{s}']
+                results = [f'**{player_name[0]}**',
+                           f'\n**Real name:** {player_real_name[0][1:]}' if player_real_name != [
+                               '  '] else "\n**Real name:** N/A",
+                           f'\n**Age:** {player_age[0]}' if player_age else "\n**Age:** N/A",
+                           f'\n**Team:** {player_team[0]}' if player_team else "\n**Team:** N/A",
+                           f'\n**Top 20:** {t}' if player_top else "\n**Top 20:** N/A"]
             # display data as a card message
-            card_message = CardMessage(Card(Module.Header('Player'), Module.Section(''.join(results))))
+            card_message = CardMessage(Card(Module.Header('Player Profile'), Module.Divider(),
+                                            Module.Section(Element.Text(''.join(results))),
+                                            Module.Divider(), Module.Section(Element.Text(st))))
             await msg.reply(card_message)
     else:
         card_message = CardMessage(Card(Module.Header('Player Not Found')))
@@ -151,7 +152,7 @@ async def player_id(msg: Message, name, id):
     html = etree.HTML(edge.page_source)  # convert to lxml to analyse
     player_info = html.xpath("//div[@class='playerInfoWrapper']")
     print(player_info)
-    stats = ['\nStatistics (Past 3 months):\n']
+    stats = ['**Statistics (Past 3 months):**\n']
     statistics = html.xpath("//div[@class='playerpage-container']/div[@class='player-stat']")
     print(statistics)
     if player_info:  # preventing the collection of data on a blank page
@@ -159,10 +160,10 @@ async def player_id(msg: Message, name, id):
             for stat in statistics:
                 type = stat.xpath("./b/text()")
                 value = stat.xpath("./span[@class='statsVal']/p/text()")
-                stats.append(f'{type[0]}: {value[0]}\n')
+                stats.append(f'**{type[0]}:** {value[0]}\n')
         else:
             stats.append('No stats from past 3 months')
-        s = ''.join(stats)
+        st = ''.join(stats)
         player_name = player_info[0].xpath(
             "./div[@class='playerNameWrapper']/div[@class='playerName']/h1[@class='playerNickname']/text()")
         player_real_name = player_info[0].xpath(
@@ -184,22 +185,38 @@ async def player_id(msg: Message, name, id):
                 top.append(', ' if i != len(player_top) - 1 else '')
         t = ''.join(top)
         # format output
-        results = [f'{player_name[0]}',
-                   f'\nReal name: {player_real_name[0][1:]}' if player_real_name != ['  '] else "\nReal name: N/A",
-                   f'\nAge: {player_age[0]}' if player_age else "\nAge: N/A",
-                   f'\nTeam: {player_team[0]}' if player_team else "\nTeam: N/A",
-                   f'\nTop 20: {t}' if player_top else "\nTop 20: N/A",
-                   f'{s}']
+        results = [f'**{player_name[0]}**',
+                   f'\n**Real name:** {player_real_name[0][1:]}' if player_real_name != [
+                       '  '] else "\n**Real name:** N/A",
+                   f'\n**Age:** {player_age[0]}' if player_age else "\n**Age:** N/A",
+                   f'\n**Team:** {player_team[0]}' if player_team else "\n**Team:** N/A",
+                   f'\n**Top 20:** {t}' if player_top else "\n**Top 20:** N/A"]
+        card_message = CardMessage(Card(Module.Header('Player Profile'), Module.Divider(),
+                                        Module.Section(Element.Text(''.join(results))),
+                                        Module.Divider(), Module.Section(Element.Text(st))))
+        await msg.reply(card_message)
     else:
-        results = ['Player Not Found']
-    card_message = CardMessage(Card(Module.Header('Player'), Module.Section(''.join(results))))
-    await msg.reply(card_message)
+        card_message = CardMessage(Card(Module.Header('Player Not Found')))
+        await msg.reply(card_message)
 
 
 # bot info
 @bot.command(name="hltvinfo")
 async def info(msg: Message):
     await msg.reply("Bot written by OOOOMGOSH\nData from www.hltv.org")
+
+
+@bot.command(name="help")
+async def help(msg: Message):
+    card_message = CardMessage(Card(Module.Header('HLTV-Bot操作指南'), Module.Divider(),
+                                    Module.Section(Element.Text('**本机器人适用于查询HLTV队伍排名，选手信息**')),
+                                    Module.Divider(), Module.Section(Element.Text('**1. `/info`**\n查询机器人信息')),
+                                    Module.Divider(), Module.Section(Element.Text('**2. `/ranking`**\n查询队伍排名')),
+                                    Module.Divider(), Module.Section(Element.Text('**3. `/player {name}`**\n查询选手信息(可能生成多个结果)')),
+                                    Module.Divider(), Module.Section(Element.Text('**4. `/player_id {name} {id}`**\n通过HLTV选手id精确查询')),
+                                    Module.Divider(), Module.Section(Element.Text('**5. `/team {name}`**\n查询队伍信息(开发中)')),
+                                    Module.Divider(), Module.Section(Element.Text('> 数据来源: [hltv.org](https://www.hltv.org/)'))))
+    await msg.reply(card_message)
 
 
 # run bot
