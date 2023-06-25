@@ -1,1 +1,1 @@
-run HLTV-Bot-LinuxChrome.py
+start HLTV-Bot-LinuxChrome.py
