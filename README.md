@@ -1,6 +1,6 @@
 # HLTV-KOOK-Bot
 
-A KOOK Bot for HLTV info: Get the latest world ranking and players' statistics through simple comments in a text channel.
+A KOOK Bot for HLTV info: Get the latest world ranking and players' statistics through simple commands in the text channel.
 
 ## Install Requirements
 
@@ -10,9 +10,9 @@ pip install -r requirements.txt
 
 ## Setup Bot
 
-Fill in bot token in config.json
+Fill in [bot token](https://developer.kookapp.cn/app/index) in config.json
 
-[Get bot token here](https://developer.kookapp.cn/app/index)
+
 ```
 { "token": "bot token", "verify_token": "", "encrypt_key": "" }
 ```
