@@ -19,9 +19,14 @@ bot = Bot(token=config['token'])
 @bot.command(name='ranking')
 async def rankings(msg: Message):
     results = []
-    # simulate chrome browser
+    # simulate Chrome browser
     s = Service('drivers/chromedriver')
-    chrome = webdriver.Chrome(service=s)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--window-size=1420,1080')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    chrome = webdriver.Chrome(service=s, chrome_options=chrome_options)
     chrome.get("https://www.hltv.org/ranking/teams/")
     session = requests.Session()  # creat session
     cookies = chrome.get_cookies()  # get cookies
@@ -64,9 +69,14 @@ async def rankings(msg: Message):
 # hltv player info
 @bot.command(name='player')
 async def player(msg: Message, name):
-    # simulate chrome browser
+    # simulate Chrome browser
     s = Service('drivers/chromedriver')
-    chrome = webdriver.Chrome(service=s)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--window-size=1420,1080')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    chrome = webdriver.Chrome(service=s, chrome_options=chrome_options)
     chrome.get(f"https://www.hltv.org/search?query={name}")
     session = requests.Session()  # creat session
     cookies = chrome.get_cookies()  # get cookies
@@ -140,9 +150,14 @@ async def player(msg: Message, name):
 # player info by selecting a specific hltv id
 @bot.command(name='player_id')
 async def player_id(msg: Message, name, id):
-    # simulate chrome browser
+    # simulate Chrome browser
     s = Service('drivers/chromedriver')
-    chrome = webdriver.Chrome(service=s)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--window-size=1420,1080')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    chrome = webdriver.Chrome(service=s, chrome_options=chrome_options)
     chrome.get(f"https://www.hltv.org/player/{id}/{name}")
     session = requests.Session()  # creat session
     cookies = chrome.get_cookies()  # get cookies

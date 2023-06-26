@@ -19,7 +19,7 @@ bot = Bot(token=config['token'])
 @bot.command(name='ranking')
 async def rankings(msg: Message):
     results = []
-    # simulate chrome browser
+    # simulate Chrome browser
     s = Service('drivers/chromedriver.exe')
     chrome = webdriver.Chrome(service=s)
     chrome.get("https://www.hltv.org/ranking/teams/")
@@ -64,7 +64,7 @@ async def rankings(msg: Message):
 # hltv player info
 @bot.command(name='player')
 async def player(msg: Message, name):
-    # simulate chrome browser
+    # simulate Chrome browser
     s = Service('drivers/chromedriver.exe')
     chrome = webdriver.Chrome(service=s)
     chrome.get(f"https://www.hltv.org/search?query={name}")
@@ -140,7 +140,7 @@ async def player(msg: Message, name):
 # player info by selecting a specific hltv id
 @bot.command(name='player_id')
 async def player_id(msg: Message, name, id):
-    # simulate chrome browser
+    # simulate Chrome browser
     s = Service('drivers/chromedriver.exe')
     chrome = webdriver.Chrome(service=s)
     chrome.get(f"https://www.hltv.org/player/{id}/{name}")
