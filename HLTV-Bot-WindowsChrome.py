@@ -5,7 +5,7 @@ from khl import Bot, Message
 from khl.card import CardMessage, Card, Module, Element, Types, Struct
 from lxml import etree
 from selenium import webdriver
-from selenium.webdriver.Chrome.service import Service
+from selenium.webdriver.chrome.service import Service
 
 # get config
 with open('config/config.json', 'r', encoding='utf-8') as f:
