@@ -21,11 +21,13 @@ async def rankings(msg: Message):
     results = []
     # simulate Chrome browser
     s = Service('drivers/chromedriver')
+    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--window-size=1420,1080')
-    # chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument(f'user-agent={user_agent}')
     chrome = webdriver.Chrome(service=s, options=chrome_options)
     chrome.get("https://www.hltv.org/ranking/teams/")
     session = requests.Session()  # creat session
@@ -71,11 +73,13 @@ async def rankings(msg: Message):
 async def player(msg: Message, name):
     # simulate Chrome browser
     s = Service('drivers/chromedriver')
+    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--window-size=1420,1080')
-    # chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument(f'user-agent={user_agent}')
     chrome = webdriver.Chrome(service=s, options=chrome_options)
     chrome.get(f"https://www.hltv.org/search?query={name}")
     session = requests.Session()  # creat session
@@ -90,7 +94,7 @@ async def player(msg: Message, name):
         player_href = detail[0].xpath("./tr/td/a/@href")
         print(player_href)
         for href in range(2 if len(player_href) >= 2 else 1):
-            chrome2 = webdriver.Chrome(service=s)
+            chrome2 = webdriver.Chrome(service=s, options=chrome_options)
             print(f"https://www.hltv.org{player_href[href]}")
             chrome2.get(f"https://www.hltv.org{player_href[href]}")
             session2 = requests.Session()  # creat session
@@ -152,11 +156,13 @@ async def player(msg: Message, name):
 async def player_id(msg: Message, name, id):
     # simulate Chrome browser
     s = Service('drivers/chromedriver')
+    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--window-size=1420,1080')
-    # chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument(f'user-agent={user_agent}')
     chrome = webdriver.Chrome(service=s, options=chrome_options)
     chrome.get(f"https://www.hltv.org/player/{id}/{name}")
     session = requests.Session()  # creat session
