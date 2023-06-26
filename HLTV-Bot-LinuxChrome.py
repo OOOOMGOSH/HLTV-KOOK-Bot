@@ -26,7 +26,7 @@ async def rankings(msg: Message):
     chrome_options.add_argument('--window-size=1420,1080')
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
-    chrome = webdriver.Chrome(service=s, chrome_options=chrome_options)
+    chrome = webdriver.Chrome(service=s, options=chrome_options)
     chrome.get("https://www.hltv.org/ranking/teams/")
     session = requests.Session()  # creat session
     cookies = chrome.get_cookies()  # get cookies
@@ -76,7 +76,7 @@ async def player(msg: Message, name):
     chrome_options.add_argument('--window-size=1420,1080')
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
-    chrome = webdriver.Chrome(service=s, chrome_options=chrome_options)
+    chrome = webdriver.Chrome(service=s, options=chrome_options)
     chrome.get(f"https://www.hltv.org/search?query={name}")
     session = requests.Session()  # creat session
     cookies = chrome.get_cookies()  # get cookies
@@ -157,7 +157,7 @@ async def player_id(msg: Message, name, id):
     chrome_options.add_argument('--window-size=1420,1080')
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
-    chrome = webdriver.Chrome(service=s, chrome_options=chrome_options)
+    chrome = webdriver.Chrome(service=s, options=chrome_options)
     chrome.get(f"https://www.hltv.org/player/{id}/{name}")
     session = requests.Session()  # creat session
     cookies = chrome.get_cookies()  # get cookies
