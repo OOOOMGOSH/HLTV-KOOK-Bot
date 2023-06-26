@@ -5,7 +5,7 @@ from khl import Bot, Message
 from khl.card import CardMessage, Card, Module, Element, Types, Struct
 from lxml import etree
 from selenium import webdriver
-from selenium.webdriver.edge.service import Service
+from selenium.webdriver.Chrome.service import Service
 
 # get config
 with open('config/config.json', 'r', encoding='utf-8') as f:
@@ -19,16 +19,16 @@ bot = Bot(token=config['token'])
 @bot.command(name='ranking')
 async def rankings(msg: Message):
     results = []
-    # simulate edge browser
+    # simulate chrome browser
     s = Service('drivers/chromedriver.exe')
-    edge = webdriver.Edge(service=s)
-    edge.get("https://www.hltv.org/ranking/teams/")
+    chrome = webdriver.Chrome(service=s)
+    chrome.get("https://www.hltv.org/ranking/teams/")
     session = requests.Session()  # creat session
-    cookies = edge.get_cookies()  # get cookies
+    cookies = chrome.get_cookies()  # get cookies
     for cookie in cookies:  # fill in cookies
         session.cookies.set(cookie['name'], cookie['value'])
     sleep(1)  # wait for the webpage to load
-    html = etree.HTML(edge.page_source)  # convert to lxml to analyse
+    html = etree.HTML(chrome.page_source)  # convert to lxml to analyse
     detail = html.xpath("//div[@class='ranking-header']")
     for i in range(len(detail)):
         if i == 0:
@@ -64,31 +64,31 @@ async def rankings(msg: Message):
 # hltv player info
 @bot.command(name='player')
 async def player(msg: Message, name):
-    # simulate edge browser
+    # simulate chrome browser
     s = Service('drivers/chromedriver.exe')
-    edge = webdriver.Edge(service=s)
-    edge.get(f"https://www.hltv.org/search?query={name}")
+    chrome = webdriver.Chrome(service=s)
+    chrome.get(f"https://www.hltv.org/search?query={name}")
     session = requests.Session()  # creat session
-    cookies = edge.get_cookies()  # get cookies
+    cookies = chrome.get_cookies()  # get cookies
     for cookie in cookies:  # fill in cookies
         session.cookies.set(cookie['name'], cookie['value'])
     sleep(1)  # wait for the webpage to load
-    html = etree.HTML(edge.page_source)  # convert to lxml to analyse
+    html = etree.HTML(chrome.page_source)  # convert to lxml to analyse
     detail = html.xpath("//table[@class='table']/tbody")
     # preventing the collection of team info
     if detail[0].xpath("./tr/td[@class='table-header']/text()")[0] == 'Player':
         player_href = detail[0].xpath("./tr/td/a/@href")
         print(player_href)
         for href in range(2 if len(player_href) >= 2 else 1):
-            edge2 = webdriver.Edge(service=s)
+            chrome2 = webdriver.Chrome(service=s)
             print(f"https://www.hltv.org{player_href[href]}")
-            edge2.get(f"https://www.hltv.org{player_href[href]}")
+            chrome2.get(f"https://www.hltv.org{player_href[href]}")
             session2 = requests.Session()  # creat session
-            cookies = edge.get_cookies()  # get cookies
+            cookies = chrome.get_cookies()  # get cookies
             for cookie in cookies:  # fill in cookies
                 session2.cookies.set(cookie['name'], cookie['value'])
             sleep(1)  # wait for the webpage to load
-            html2 = etree.HTML(edge2.page_source)  # convert to lxml to analyse
+            html2 = etree.HTML(chrome2.page_source)  # convert to lxml to analyse
             player_info = html2.xpath("//div[@class='playerInfoWrapper']")
             print(player_info)
             stats = ['**Statistics (Past 3 months):**\n']
@@ -140,16 +140,16 @@ async def player(msg: Message, name):
 # player info by selecting a specific hltv id
 @bot.command(name='player_id')
 async def player_id(msg: Message, name, id):
-    # simulate edge browser
+    # simulate chrome browser
     s = Service('drivers/chromedriver.exe')
-    edge = webdriver.Edge(service=s)
-    edge.get(f"https://www.hltv.org/player/{id}/{name}")
+    chrome = webdriver.Chrome(service=s)
+    chrome.get(f"https://www.hltv.org/player/{id}/{name}")
     session = requests.Session()  # creat session
-    cookies = edge.get_cookies()  # get cookies
+    cookies = chrome.get_cookies()  # get cookies
     for cookie in cookies:  # fill in cookies
         session.cookies.set(cookie['name'], cookie['value'])
     sleep(1)  # wait for the webpage to load
-    html = etree.HTML(edge.page_source)  # convert to lxml to analyse
+    html = etree.HTML(chrome.page_source)  # convert to lxml to analyse
     player_info = html.xpath("//div[@class='playerInfoWrapper']")
     print(player_info)
     stats = ['**Statistics (Past 3 months):**\n']
