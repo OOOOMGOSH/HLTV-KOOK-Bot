@@ -37,5 +37,5 @@ Choose the correct version of the code depending on your system and the web brow
 
 ## License
 
-[GPL](LICENSE) © OOOOMGOSH
+[GPL v3.0](LICENSE) © OOOOMGOSH
 
