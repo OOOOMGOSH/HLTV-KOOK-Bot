@@ -237,7 +237,7 @@ async def help(msg: Message):
                                         Element.Text('**4. `/team {name} {id(optional)}`**\n    查询队伍信息')),
                                     Module.Divider(),
                                     Module.Section(Element.Text('> 数据来源: [hltv.org](https://www.hltv.org/)\n'
-                                                                '如有其他问题、bug或反馈建议，请私信开发人员: OOOOMGOSH#0001'))))
+                                                                '如有其他问题、bug或反馈建议，请私信开发人员:\nOOOOMGOSH#0001'))))
     await msg.reply(card_message)
 
 # run bot
