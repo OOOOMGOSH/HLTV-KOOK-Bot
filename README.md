@@ -1,6 +1,8 @@
 # HLTV-KOOK-Bot
 
-A KOOK Bot for HLTV info: Get the latest world ranking and players' statistics through simple commands in the text channel.
+A KOOK Bot for HLTV info
+
+Get the latest world ranking and players' statistics through simple commands in the text channel.
 
 ## Install Requirements
 
