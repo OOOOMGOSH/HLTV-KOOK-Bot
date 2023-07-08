@@ -225,17 +225,15 @@ async def help(msg: Message):
     card_message = CardMessage(Card(Module.Header('HLTV-Bot操作指南'), Module.Divider(),
                                     Module.Section(Element.Text('**本机器人适用于查询HLTV队伍/选手信息**')),
                                     Module.Divider(),
-                                    Module.Section(Element.Text('**1. `/hltvinfo`**\n    查询机器人信息')),
-                                    Module.Divider(),
-                                    Module.Section(Element.Text('**2. `/ranking`**\n    查询队伍排名')),
+                                    Module.Section(Element.Text('**1. `/ranking`**\n    查询队伍排名')),
                                     Module.Divider(), Module.Section(
-            Element.Text('**3. `/player {name} {hltv_id(optional)}`**\n    查询选手信息(可能生成多个结果)')),
+            Element.Text('**2. `/player {name} {hltv_id(optional)}`**\n    查询选手信息(可能生成多个结果)')),
                                     Module.Divider(),
-                                    Module.Section(Element.Text('**4. `/top_players {top xx, default = 10}`**\n    '
+                                    Module.Section(Element.Text('**3. `/top_players {top xx, default = 10}`**\n    '
                                                                 '查询选手排名(近一年)')),
                                     Module.Divider(),
                                     Module.Section(
-                                        Element.Text('**5. `/team {name} {id(optional)}`**\n    查询队伍信息')),
+                                        Element.Text('**4. `/team {name} {id(optional)}`**\n    查询队伍信息')),
                                     Module.Divider(),
                                     Module.Section(Element.Text('> 数据来源: [hltv.org](https://www.hltv.org/)\n'
                                                                 '如有其他问题、bug或反馈建议，请私信开发人员: OOOOMGOSH#0001'))))
