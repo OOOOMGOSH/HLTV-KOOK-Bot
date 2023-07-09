@@ -159,7 +159,6 @@ async def team(msg: Message, team_name="G2", *id):
         team_href = [f"/team/{id[0]}/{team_name}"]
     else:  # search by team name
         page = simulate_browser(f"https://www.hltv.org/search?query={team_name}")
-        detail = page.xpath("//table[@class='table']/tbody")
         # check if the team exist
         if page.xpath("//td[@class='table-header']/text()")[0] == 'Team':
             # extract team url
