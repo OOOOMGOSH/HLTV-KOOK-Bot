@@ -159,6 +159,7 @@ async def team(msg: Message, team_name="G2", *id):
         team_href = [f"/team/{id[0]}/{team_name}"]
     else:  # search by team name
         page = simulate_browser(f"https://www.hltv.org/search?query={team_name}")
+        detail = page.xpath("//table[@class='table']/tbody")
         # check if the team exist
         if page.xpath("//td[@class='table-header']/text()")[0] == 'Team':
             # extract team url
@@ -225,7 +226,7 @@ async def help(msg: Message):
                                     Module.Divider(),
                                     Module.Section(Element.Text('**1. `/ranking`**\n    查询队伍排名')),
                                     Module.Divider(), Module.Section(
-            Element.Text('**2. `/player {name} {hltv_id(optional)}`**\n    查询选手信息(可能生成多个结果)')),
+            Element.Text('**2. `/player {name} {id(optional)}`**\n    查询选手信息(可能生成多个结果)')),
                                     Module.Divider(),
                                     Module.Section(Element.Text('**3. `/top_players {top xx, default = 10}`**\n    '
                                                                 '查询选手排名(近一年)')),
@@ -233,8 +234,9 @@ async def help(msg: Message):
                                     Module.Section(
                                         Element.Text('**4. `/team {name} {id(optional)}`**\n    查询队伍信息')),
                                     Module.Divider(),
-                                    Module.Section(Element.Text('> 数据来源: [hltv.org](https://www.hltv.org/)\n'
-                                                                '如有其他问题、bug或反馈建议，请私信开发人员:\nOOOOMGOSH#0001'))))
+                                    Module.Context(Element.Text('> 数据来源: [hltv.org](https://www.hltv.org/)'),
+                                                   Element.Text(
+                                                       '如有其他问题、bug或反馈建议，请私信开发人员:\nOOOOMGOSH#0001'))))
     await msg.reply(card_message)
 
 # run bot
